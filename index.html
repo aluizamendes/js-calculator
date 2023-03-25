@@ -14,39 +14,40 @@
     <main>
       <div class="calculadora">
         <div class="display-box">
-          <input id="display" />
+          <div id="display">0</div>
         </div>
         <div class="buttons-wrapper">
           <!-- linha 1 -->
-          <button type="action" value="" class="button operator">AC</button>
-          <button type="action" value="" class="button operator">C</button>
-          <button type="operator" value="%" class="button operator">%</button>
-          <button type="operator" value="/" class="button operator">÷</button>
+          <button data-type="clean" value="" class="button operator">AC</button>
+          <button data-type="backspace" value="" class="button operator">C</button>
+          <button data-type="operator" value="%" class="button operator">%</button>
+          <button data-type="operator" value="/" class="button operator">÷</button>
 
           <!-- linha 2 -->
-          <button type="number" value="7" class="button">7</button>
-          <button type="number" value="8" class="button">8</button>
-          <button type="number" value="9" class="button">9</button>
-          <button type="operator" value="*" class="button operator">x</button>
+          <button data-type="number" value="7" class="button">7</button>
+          <button data-type="number" value="8" class="button">8</button>
+          <button data-type="number" value="9" class="button">9</button>
+          <button data-type="operator" value="*" class="button operator">x</button>
 
           <!-- linha 3 -->
-          <button type="number" value="4" class="button">4</button>
-          <button type="number" value="5" class="button">5</button>
-          <button type="number" value="6" class="button">6</button>
-          <button type="operator" value="-" class="button operator">-</button>
+          <button data-type="number" value="4" class="button">4</button>
+          <button data-type="number" value="5" class="button">5</button>
+          <button data-type="number" value="6" class="button">6</button>
+          <button data-type="operator" value="-" class="button operator">-</button>
 
           <!-- linha 4 -->
-          <button type="number" value="1" class="button">1</button>
-          <button type="number" value="2" class="button">2</button>
-          <button type="number" value="3" class="button">3</button>
-          <button type="operator" value="+" class="button operator">+</button>
+          <button data-type="number" value="1" class="button">1</button>
+          <button data-type="number" value="2" class="button">2</button>
+          <button data-type="number" value="3" class="button">3</button>
+          <button data-type="operator" value="+" class="button operator">+</button>
 
           <!-- linha 5 -->
-          <button type="number" value="0" class="button">0</button>
-          <button type="action" value="." class="button">.</button>
-          <button type="operator" value="=" class="button equals">=</button>
+          <button data-type="number" value="0" class="button">0</button>
+          <button data-type="decimal" value="." class="button">.</button>
+          <button data-type="equal" value="=" class="button equals">=</button>
         </div>
       </div>
+      <div id="resultado"></div>
     </main>
 
     <script src="js/app.js"></script>
