@@ -54,6 +54,11 @@ main {
   outline: none;
 
   background-color: #f3f3f3;
+  transition: 0.4s;
+}
+
+button[data-type="number"]:hover {
+  background-color: #e9e9eb;
 }
 
 .equals {
@@ -64,4 +69,10 @@ main {
 
 .operator {
   background-color: #fcedd9;
+
+  transition: 0.4s;
+}
+
+.operator:hover {
+  background-color: #f7ddb5;
 }
