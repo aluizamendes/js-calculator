@@ -76,3 +76,10 @@ button[data-type="number"]:hover {
 .operator:hover {
   background-color: #f7ddb5;
 }
+
+.previousOperation {
+  text-align: right;
+  height: 30px;
+  font-size: 18px;
+  color: #b8b8b8;
+}

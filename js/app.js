@@ -2,6 +2,7 @@ let buttons = document.querySelectorAll(".button");
 let numberBtns = document.querySelectorAll("[type=number]");
 let display = document.querySelector("#display");
 let calculator = document.querySelector(".calculadora");
+let historic = document.querySelector(".previousOperation");
 
 function calcular(n1, operator, n2) {
   let resultado = "";
@@ -42,6 +43,7 @@ buttons.forEach((button) => {
         display.textContent += numValue;
       }
     } else if (operatorType == "operator" && calculator.dataset.previousKeyType !== "operator" && calculator.dataset.operator == "") {
+      historic.textContent = "";
       // pegar o numero atual exibido no display
       // pegar numero antes de adicionar o simbolo do operador no display
       calculator.dataset.firstValue = display.textContent;
@@ -53,12 +55,14 @@ buttons.forEach((button) => {
       calculator.dataset.operator = operatorTargetValue;
 
       calculator.dataset.previousKeyType = "operator";
+      historic.textContent += `${calculator.dataset.firstValue} ${calculator.dataset.operator} `;
     } else if (operatorType == "decimal") {
       // adiciona ponto decimal
       display.textContent += ".";
     } else if (operatorType == "clean") {
       // limpa e volta o display pra zero
       display.textContent = "0";
+      historic.textContent = "";
 
       // limpa datasets
       calculator.dataset.firstValue = "";
@@ -73,6 +77,8 @@ buttons.forEach((button) => {
       if (ultimoElementoDoDisplay == calculator.dataset.operator) {
         console.log(ultimoElementoDoDisplay);
         calculator.dataset.operator = "";
+
+        historic.textContent = historic.textContent.slice(0, -2);
       }
 
       display.textContent = display.textContent.slice(0, -1);
@@ -104,10 +110,11 @@ buttons.forEach((button) => {
         // calcula e mostra o resultado no display
         let resultado = calcular(calculator.dataset.firstValue, calculator.dataset.operator, secondValue);
         display.textContent = resultado;
-        console.log(secondValue);
 
         calculator.dataset.previousKeyType = "";
         calculator.dataset.operator = "";
+
+        historic.textContent += `${secondValue} =`;
       }
     }
   });
