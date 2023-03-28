@@ -35,13 +35,24 @@ buttons.forEach((button) => {
     let operatorTargetValue = target.value;
 
     if (operatorType == "number") {
-      calculator.dataset.previousKeyType = "number";
-
       if (display.textContent == "0") {
         display.textContent = numValue;
+      } else if (calculator.dataset.previousKeyType == "equal") {
+        // limpa e volta o display pra zero
+        display.textContent = "";
+        historic.textContent = "";
+
+        // limpa datasets
+        calculator.dataset.firstValue = "";
+        calculator.dataset.operator = "";
+        calculator.dataset.previousKeyType = "";
+
+        // adiciona numero ao display
+        display.textContent += numValue;
       } else {
         display.textContent += numValue;
       }
+      calculator.dataset.previousKeyType = "number";
     } else if (operatorType == "operator" && calculator.dataset.previousKeyType !== "operator" && calculator.dataset.operator == "") {
       historic.textContent = "";
       // pegar o numero atual exibido no display
@@ -85,25 +96,28 @@ buttons.forEach((button) => {
 
       calculator.dataset.previousKeyType = "backspace";
     } else if (operatorType == "equal") {
-      // se a ultima tecla clicada for um operador ou o operador nao foi definido,
-      // se clicar no igual o display nao muda e nao calcula nada
-      if (calculator.dataset.previousKeyType == "operator" || calculator.dataset.operator == "") {
-        display.textContent = display.textContent;
-      } else {
-        //mostrar resultado
+      // obter segundo valor do display
+      let secondValue = "";
 
-        // obter segundo valor do display
-        let secondValue = "";
+      let displayContent = display.textContent;
 
-        let displayContent = display.textContent;
-
-        for (let i = 0; i < displayContent.length; i++) {
-          if (displayContent.charAt(i) == calculator.dataset.operator) {
-            secondValue = displayContent.slice(i + 1);
-            break;
-          }
+      for (let i = 0; i < displayContent.length; i++) {
+        if (displayContent.charAt(i) == calculator.dataset.operator) {
+          secondValue = displayContent.slice(i + 1);
+          break;
         }
+      }
 
+      console.log(secondValue);
+
+      // se a ultima tecla clicada for um operador ou o operador nao foi definido ou nao ha o segundo valor para realizar a operacao,
+      // se clicar no igual o display nao muda e nao calcula nada
+      if (calculator.dataset.previousKeyType == "operator" || calculator.dataset.operator == "" || secondValue == "") {
+        display.textContent = display.textContent;
+      }
+
+      //mostrar resultado
+      else {
         // limpar antes de mostrar resultado
         display.textContent = "";
 
@@ -111,7 +125,7 @@ buttons.forEach((button) => {
         let resultado = calcular(calculator.dataset.firstValue, calculator.dataset.operator, secondValue);
         display.textContent = resultado;
 
-        calculator.dataset.previousKeyType = "";
+        calculator.dataset.previousKeyType = "equal";
         calculator.dataset.operator = "";
 
         historic.textContent += `${secondValue} =`;
